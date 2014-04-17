@@ -5,8 +5,5 @@ function sum(x,y){
 		if (isNaN(n)) return 0;
 		return parseInt(n);
 	}
-	var result = 0;
-	for(var i=0;i<arguments.length;i++)
-		result += parseArg(arguments[i]);
-	return result;
+	return arguments.length <= 1 ? parseArg(arguments[0]) : parseArg(arguments[0]) + sum([].slice.call(arguments,1));
 }

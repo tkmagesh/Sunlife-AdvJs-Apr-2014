@@ -121,4 +121,32 @@ describe("A calculator",function(){
 		//assert
 		expect(result).toBe(expectedResult);
 	});
+
+	it("Should be able to add a nested array of numbers",function(){
+		//arrange
+		var numbers = [10,[20,[30,[40]]]],
+			expectedResult = 100;
+		
+
+		//act
+		var result = sum(numbers);
+
+		//assert
+		expect(result).toBe(expectedResult);
+	});
+
+	it("Should be able to add an array of functions returing an array of numbers",function(){
+		//arrange
+		var f1 = function(){ return [10,20];},
+			f2 = function(){ return [30,40];},
+			expectedResult = 100;
+		
+		
+
+		//act
+		var result = sum([f1,f2]);
+
+		//assert
+		expect(result).toBe(expectedResult);
+	});
 });
