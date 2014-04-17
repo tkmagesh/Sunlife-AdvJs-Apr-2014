@@ -141,8 +141,6 @@ describe("A calculator",function(){
 			f2 = function(){ return [30,40];},
 			expectedResult = 100;
 		
-		
-
 		//act
 		var result = sum([f1,f2]);
 
