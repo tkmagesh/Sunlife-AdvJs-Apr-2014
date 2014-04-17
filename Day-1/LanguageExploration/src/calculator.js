@@ -1,6 +1,7 @@
 function sum(x,y){
 	function parseArg(n){
 		if (typeof n === "function") return parseArg(n());
+		if (Array.isArray(n)) return sum.apply(this,n);
 		if (isNaN(n)) return 0;
 		return parseInt(n);
 	}

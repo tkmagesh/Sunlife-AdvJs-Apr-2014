@@ -108,4 +108,17 @@ describe("A calculator",function(){
 		//assert
 		expect(result).toBe(expectedResult);
 	});
+
+	it("Should be able to add an array of numbers",function(){
+		//arrange
+		var numbers = [10,20,30,40],
+			expectedResult = 100;
+		
+
+		//act
+		var result = sum(numbers);
+
+		//assert
+		expect(result).toBe(expectedResult);
+	});
 });
