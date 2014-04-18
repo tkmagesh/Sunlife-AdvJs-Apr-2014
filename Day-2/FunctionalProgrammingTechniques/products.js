@@ -78,8 +78,106 @@ function groupBy(list,attrName){
 	return result;
 }
 
-min
+/*min
 max
 countBy
-average
+average*/
 
+function min(list,attrName){
+	var result = list[0][attrName];
+	for(var i=1;i<list.length;i++){
+		var value = list[i][attrName];
+		if (value < result)  result = value;
+	}
+	return result;
+}
+
+function min(list,selector){
+	if (typeof selector === "string"){
+		var attrName = selector;
+		selector = function(item){ return item[attrName];};
+	}
+	var result = selector(list[0]);
+	for(var i=1;i<list.length;i++){
+		var value = selector(list[i]);
+		if (value < result)  result = value;
+	}
+	return result;
+}
+
+function min(list,selector){
+	if (typeof selector === "string"){
+		var attrName = selector;
+		selector = function(item){ return item[attrName];};
+	}
+	var result = selector(list[0]);
+	for(var i=1;i<list.length;i++){
+		var value = selector(list[i]);
+		if (value > result)  result = value;
+	}
+	return result;
+}
+
+
+
+function countBy(list,criteriaFn){
+	var result = 0;
+	for(var i=0;i<list.length;i++){
+		var item = list[i];
+		if (criteriaFn(item)) 
+			result++;
+	}
+	return result;
+}
+
+function all(list,criteriaFn){
+	var result = true;
+	for(var i=0;i<list.length;i++)
+		if (!criteriaFn(list[i])){
+			result = false;
+			break;
+		}
+	return result;
+}
+
+function any(list,criteriaFn){
+	var result = false;
+	for(var i=0;i<list.length;i++)
+		if (criteriaFn(list[i])){
+			result = true;
+			break;
+		}
+	return result;
+}
+
+function each(list,iterator){
+	for(var i=0;i<list.length;i++)
+		iterator(list[i]);
+}
+
+
+var categories = [
+	{id : 1, name : "stationary"},
+	{id : 2, name : "grocery"}
+]
+
+function join(leftList,rightList,leftKeyName,rightKeyName,transformerFn){
+   var result = [];
+   for(var i=0;i<leftList.length;i++){
+       var leftValue = leftList[i][leftKeyName];
+       for(var j=0;j<rightList.length;j++){
+          var rightValue = rightList[j][rightKeyName];
+          if (leftValue === rightValue)
+             result.push(transformerFn(leftList[i],rightList[j]));
+       }
+   }
+   return result;
+}
+
+var productsAndCategories = join(products,categories,"category","id",function(p,c){
+   return { id : p.id, name : p.name, cost : p.cost, units : p.units, category : c.name };
+})
+
+/*
+bindThis(obj,f) .........??
+*/
