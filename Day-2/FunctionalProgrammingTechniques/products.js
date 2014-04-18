@@ -6,3 +6,14 @@ var products = [
 	{id :9, name:"ken", cost:30, units:90, category:2},
 	{id :4, name:"zen", cost:20, units:30, category:1}
 ]
+
+function sort(list){
+	for(var i=0;i<list.length-1;i++)
+		for(var j=i+1;j<list.length;j++){
+			var left = list[i], right=list[j];
+			if (left.id > right.id){
+				list[i] = list[j];
+				list[j] = left;
+			}
+		}
+}
