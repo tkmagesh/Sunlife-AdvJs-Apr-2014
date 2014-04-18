@@ -16,3 +16,30 @@ Rewrite the above function so that it implements the following:
 
 clue : hide data members and implement accessor functions
 */
+
+function Product(id,name,units,cost){
+	var _id = id,
+		_name = name,
+		_cost = cost,
+		_units = units;
+
+	this.id = function(){
+		return _id;
+	};
+
+	this.name = function(val){
+		if (typeof val === "undefined") return _name;
+		if (val !== "") _name = val;
+	};
+
+	this.cost = function(val){
+		if (typeof val === "undefined") return _cost;
+		if(val > _cost) _cost = val;
+	};
+
+	this.units = function(val){
+		if (typeof val === "undefined") return _units;
+		if (val > 0) _units = val;
+	}
+
+}
