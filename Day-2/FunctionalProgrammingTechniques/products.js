@@ -65,3 +65,21 @@ function filter(list,criteriaFn){
 var overStockedCrieriaFn = function(p){
 	return p.units > 50;
 }
+
+function groupBy(list,attrName){
+	var result = {};
+	for(var i=0;i<list.length;i++){
+		var key = list[i][attrName]
+		/*if (typeof result[key] === "undefined")
+			result[key] = [];*/
+		result[key] = result[key] || [];
+		result[key].push(list[i]);
+	}
+	return result;
+}
+
+min
+max
+countBy
+average
+
