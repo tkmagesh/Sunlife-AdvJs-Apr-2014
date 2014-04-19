@@ -22,6 +22,19 @@
 		margin-bottom: 5px;
 		cursor: pointer;
 	}
+	#divNotifications {
+		position: absolute;
+		bottom: 0px;
+		right: 0px;
+		z-index: 1000;
+
+	}
+	.divMessage{
+		margin: 10px;
+		border: 2px solid gray;
+		border-radius: 4px;
+		
+	}
 	</style>
 	<script src="jquery-1.11.0.js"></script>
 	<script type="text/javascript">
@@ -32,6 +45,7 @@
 			$("#btnAddTask").on("click",onBtnAddTaskClick);
 			$("#btnRemoveCompleted").click(onBtnRemoveCompletedClick);
 			attachTaskClickHandlers();
+			//$("#divNotifications").hide();
 		});
 
 		function attachTaskClickHandlers(){
@@ -52,13 +66,25 @@
 			//e.stopPropagation();
 		}
 		function onBtnRemoveCompletedClick(){
-			$("#ulTaskList > li.completed").fadeOut(5000,function(){ 
+			/*$("#ulTaskList > li.completed").fadeOut(5000,function(){ 
+				$(this).remove();
+			});*/
+			$("#ulTaskList > li.completed").animate({fontSize : '32px',opacity : 0},300,function(){ 
 				$(this).remove();
 			});
 			displayMessage("Zero or more completed tasks are removed..!");
 		}
 		function displayMessage(msg){
-			$("#divMessage").html(msg).fadeIn(400).delay(4000).fadeOut(400);
+			//$("#divMessage").html(msg).fadeIn(400).delay(4000).fadeOut(400);
+			$("<div class='divMessage'></div>")
+				.html(msg)
+				.hide()
+				.appendTo("#divNotifications")
+				.slideDown(400)
+				.delay(4000)
+				.slideUp(400,function(){
+					$(this).remove();
+				});
 		}
 	})();
 	</script>
@@ -75,6 +101,8 @@
 		<li>Task -2</li>
 		<li>Task -3</li>
 	</ul>
-	<div id="divMessage"></div>
+	<div id="divNotifications">
+		
+	</div>
 </body>
 </html>
