@@ -4,6 +4,21 @@
 	<meta charset="UTF-8">
 	<title>Ajax Demos</title>
 	<script src="jquery-1.11.0.js"></script>
+	<script src="handlebars-v1.3.0.js"></script>
+	<script type="text/template" id="productsListTemplate">
+		<h3>Using Templates</h3>
+		<table>
+			{{#each products}}
+			<tr>
+				<td>{{id}}</td>
+				<td>{{name}}</td>
+				<td>{{cost}}</td>
+				<td>{{units}}</td>
+				<td>{{category}}</td>
+			</tr>
+			{{/each}}
+		</table>
+	</script>
 	<script>
 	$(function(){
 		$("#btnAjaxGetDemo").click(function(){
@@ -38,6 +53,35 @@
 		$("#btnAjaxGetScriptDemo").click(function(){
 			$.getScript("json2.js");
 		})
+		$("#btnAjaxDemo").click(function(){
+			$.ajax({
+				url : "products.json",
+				type : "get",
+				contentType : "json",
+				data : '{}',
+				dataType : "json",
+				success : handleProductsData
+			});
+		});
+		$("#btnAjaxDemoWithTemplates").click(function(){
+			$.ajax({
+				url : "products.json",
+				type : "get",
+				contentType : "json",
+				data : '{}',
+				dataType : "json",
+				success : handleProductsDataWithTemplate
+			});
+		});
+		function handleProductsDataWithTemplate(data){
+			var products = {
+				products : data
+			};
+			var templateContent = $("#productsListTemplate").html();
+			var template = Handlebars.compile(templateContent);
+			var html = template(products);
+			$("#divGetDemoForJson").append(html);
+		}
 	});
 	</script>
 </head>
@@ -54,6 +98,10 @@
 	<input type="button" value="$.getJSON() Demo" id="btnAjaxGetJSONDemo">
 	<hr>
 	<input type="button" value="$.getScript() Demo" id="btnAjaxGetScriptDemo">
+	<hr>
+	<input type="button" value="$.ajax() Demo" id="btnAjaxDemo">
+	<hr>
+	<input type="button" value="$.ajax() Demo with Templates" id="btnAjaxDemoWithTemplates">
 	<hr>
 </body>
 </html>

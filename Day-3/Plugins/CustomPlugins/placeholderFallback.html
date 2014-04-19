@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Plugins Demo</title>
+	<script src="jquery-1.11.0.js"></script>
+	<style>
+	.hint{
+		color : gray;
+		font-style: italic;
+	}
+	</style>
+	<script src="jquery.applyHint.js"></script>
+	<script>
+	/*$(function(){
+		var hintText = "Enter First Name..";
+		$(":text").bind({
+			focus : function(){
+				var $this = $(this),
+					hintText = $this.attr('data-hintText');
+				if ($this.val() === hintText){
+					$this.val('').removeClass('hint');
+				}
+			},
+			blur : function(){
+				var $this = $(this),
+					hintText = $this.attr('data-hintText');
+				if ($this.val() === ''){
+					$this.val(hintText).addClass("hint");
+				}
+			}
+		}).trigger('focus');
+	})*/
+	</script>
+</head>
+<body>
+	<input type="text" name="" id="txtFirstName" data-hintText="Enter First Name..">
+	<input type="text" name="" id="txtLastName" data-hintText="Enter Last Name..">
+</body>
+</html>
