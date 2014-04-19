@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Task Manager</title>
+	<script src="jquery-1.11.0.js"></script>
+	<style>
+	.completed{
+		text-decoration: line-through;
+		color : red;
+		font-style: italic;
+	}
+	ul{
+		width: 300px;
+	}
+	li{
+		list-style: none;
+		border: 1px solid gray;
+		background-color: #e7e7e7;
+		padding: 5px;
+		border-radius: 4px;
+		margin-bottom: 5px;
+		cursor: pointer;
+	}
+	</style>
+	<script src="jquery-1.11.0.js"></script>
+	<script type="text/javascript">
+	(function(){
+		$(function(){
+			//$("#btnAddTask").click(onBtnAddTaskClick);
+			//$("#btnAddTask").bind("click",onBtnAddTaskClick);
+			$("#btnAddTask").on("click",onBtnAddTaskClick);
+			$("#btnRemoveCompleted").click(onBtnRemoveCompletedClick);
+			attachTaskClickHandlers();
+		});
+
+		function attachTaskClickHandlers(){
+			//$("#ulTaskList > li").click(onTaskItemClick);
+			//$("#ulTaskList").delegate("li","click",onTaskItemClick);
+			$("#ulTaskList").on("click","li",onTaskItemClick)
+		}
+		function onBtnAddTaskClick(){
+			$("<li></li>")
+				.html($("#txtTask").val())
+				.appendTo("#ulTaskList");
+			displayMessage("A new task is added..!");
+		}
+		function onTaskItemClick(e){
+			$(this).toggleClass("completed");
+			//e.stopPropagation();
+		}
+		function onBtnRemoveCompletedClick(){
+			$("#ulTaskList > li.completed").remove();
+			displayMessage("Zero or more completed tasks are removed..!");
+		}
+		function displayMessage(msg){
+			$("#divMessage").html(msg);
+		}
+	})();
+	</script>
+</head>
+<body>
+	<h1>Task Manager</h1>
+	<hr>
+	<span>Task :</span>
+	<input type="text" name="" id="txtTask">
+	<input type="button" value="Add Task" id="btnAddTask">
+	<input type="button" value="Remove Completed" id="btnRemoveCompleted">
+	<ul id="ulTaskList">
+		<li>Task -1</li>
+		<li>Task -2</li>
+		<li>Task -3</li>
+	</ul>
+	<div id="divMessage"></div>
+</body>
+</html>
