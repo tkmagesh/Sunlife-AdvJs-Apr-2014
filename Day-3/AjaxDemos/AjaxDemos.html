@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ajax Demos</title>
+	<script src="jquery-1.11.0.js"></script>
+	<script>
+	$(function(){
+		$("#btnAjaxGetDemo").click(function(){
+			$.get("serverPage.html",handleHtmlResponse,"html");
+		});
+		function handleHtmlResponse(data){
+			$("#divGetHtmlDemo").append(data);
+		}
+		$("#btnAjaxLoadDemo").click(function(){
+			$("#divLoadDemo").load("serverPage.html");
+		});
+		$("#btnAjaxGetDemoForJson").click(function(){
+			$.get("products.json",handleProductsData,"json");
+		});
+		function handleProductsData(data){
+				var result = "<table border='1'>"
+				$(data).each(function(){
+					result += "<tr>";
+					result += "<td>" + this.id + "</td>";
+					result += "<td>" + this.name + "</td>";
+					result += "<td>" + this.cost + "</td>";
+					result += "<td>" + this.units + "</td>";
+					result += "<td>" + this.category + "</td>";
+					result += "</tr>"
+				});
+				result += "</table>";
+				$("#divGetDemoForJson").append(result);
+			}
+		$("#btnAjaxGetJSONDemo").click(function(){
+			$.getJSON("products.json",handleProductsData)
+		});
+		$("#btnAjaxGetScriptDemo").click(function(){
+			$.getScript("json2.js");
+		})
+	});
+	</script>
+</head>
+<body>
+	<input type="button" value="$.get() Demo" id="btnAjaxGetDemo">
+	<div id="divGetHtmlDemo"></div>
+	<hr>
+	<input type="button" value="load() Demo" id="btnAjaxLoadDemo">
+	<div id="divLoadDemo"></div>
+	<hr>
+	<input type="button" value="$.get() Demo for JSON" id="btnAjaxGetDemoForJson">
+	<div id="divGetDemoForJson"></div>
+	<hr>
+	<input type="button" value="$.getJSON() Demo" id="btnAjaxGetJSONDemo">
+	<hr>
+	<input type="button" value="$.getScript() Demo" id="btnAjaxGetScriptDemo">
+	<hr>
+</body>
+</html>
