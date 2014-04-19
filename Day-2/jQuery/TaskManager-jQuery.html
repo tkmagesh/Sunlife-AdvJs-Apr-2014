@@ -42,7 +42,9 @@
 		function onBtnAddTaskClick(){
 			$("<li></li>")
 				.html($("#txtTask").val())
-				.appendTo("#ulTaskList");
+				.hide()
+				.appendTo("#ulTaskList")
+				.slideDown('slow');
 			displayMessage("A new task is added..!");
 		}
 		function onTaskItemClick(e){
@@ -50,11 +52,13 @@
 			//e.stopPropagation();
 		}
 		function onBtnRemoveCompletedClick(){
-			$("#ulTaskList > li.completed").remove();
+			$("#ulTaskList > li.completed").fadeOut(5000,function(){ 
+				$(this).remove();
+			});
 			displayMessage("Zero or more completed tasks are removed..!");
 		}
 		function displayMessage(msg){
-			$("#divMessage").html(msg);
+			$("#divMessage").html(msg).fadeIn(400).delay(4000).fadeOut(400);
 		}
 	})();
 	</script>
